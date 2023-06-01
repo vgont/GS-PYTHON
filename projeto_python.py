@@ -41,7 +41,7 @@ def luz_solar(nome):
     return luz
 
 def jardim_casa(moradia):
-    if moradia == 'c':
+    if moradia == 'casa':
         while True:
             jardim = input('Sua casa possui um jardim? [s]im/[n]ão\n:')
             match jardim:
@@ -51,24 +51,25 @@ def jardim_casa(moradia):
                     print('Opção inválida')
         return jardim
     
-def espaco_moradia(moradia):
-    if moradia == 'casa':
-        while True:
-                espaco = input(f'Possui muito espaço em sua {moradia}? [s]im/[n]ão\n:')
-                match espaco:
-                    case 's' | 'n':
-                        break
-                    case _:
-                        print('Opção inválida')
-    else:
-        while True:
-                espaco = input(f'Possui muito espaço em seu {moradia}? [s]im/[n]ão\n:')
-                match espaco:
-                    case 's' | 'n':
-                        break
-                    case _:
-                        print('Opção inválida')
-        return espaco
+def espaco_moradia(moradia, jardim):
+    if jardim == 'n' or moradia == 'apartamento':
+        if moradia == 'casa':
+            while True:
+                    espaco = input(f'Possui muito espaço em sua {moradia}? [s]im/[n]ão\n:')
+                    match espaco:
+                        case 's' | 'n':
+                            break
+                        case _:
+                            print('Opção inválida')
+        else:
+            while True:
+                    espaco = input(f'Possui muito espaço em seu {moradia}? [s]im/[n]ão\n:')
+                    match espaco:
+                        case 's' | 'n':
+                            break
+                        case _:
+                            print('Opção inválida')
+            return espaco
 
 def qtd_sementes(espaco, luz, nome):
     while True:
@@ -116,43 +117,54 @@ def lista_semente(qtd_sementes):
         cont+=1
     return sementes
 
-def menu_horta(nome, moradia, hortas):
-    if moradia == 'casa':
-        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana tradicional\n3-Horta urbana vertical\n4-Horta urbana em contentores')
-        escolha = input(f'Certo, {nome}. Você possui alguma dúvida sobre os tipos de horta? [s]im ou [n]ão\n:')
-        if escolha == 's':
-            while escolha == 's':
-                op = int(input('Digite o número da horta que você gostaria de saber mais\n:')) 
-                match op:
-                    case 1 | 2 | 3:
-                        print(hortas[op-1])
-                        escolha = input('Mais alguma dúvida? [s]im ou [n]ão\n:')
-                    case _:
-                        print('Opção inválida')
-    else: 
-        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana vertical\n2-Horta urbana em contentores')
-        escolha = input(f'Certo, {nome}. Você possui alguma dúvida sobre os tipos de horta? [s]im ou [n]ão\n:')
-        if escolha == 's':
-            while escolha == 's':
-                op = int(input('Digite o número da horta que você gostaria de saber mais\n:')) 
-                match op:
-                    case 1 | 2:
-                        print(hortas[op])
-                        escolha = input('Mais alguma dúvida? [s]im ou [n]ão\n:')
-                    case _:
-                        print('Opção inválida')
-
-#AFUNILAR PRO PROGRAMA ESCOLHER A HORTA ADEQUADA PARA O USUÁRIO ---------------------
-
+def horta_trad(nome, moradia, jardim, luz):
+    if (moradia == 'casa' and jardim == 's'):
+        horta == 'horta tradicional'
+        print(f'{nome}, analisando os dados que me forneceu, sugiro a {horta}. Ela é uma ótima opção para casas com jardim.')
+        return horta
+                
     
+def horta_vert(moradia, espaco, nome):
+    if (moradia == 'casa' or  moradia == 'apartamento') and espaco == 'n':
+        horta == 'horta vertical'
+        print(f'{nome}, analisando os dados que me forneceu, sugiro a {horta}. Ela é a mais adequada quando há pouco espaço.')
+        return horta
+    
+def horta_contentor(moradia, nome, espaco):
+    if (moradia == 'casa' or moradia =='apartamento') and espaco == 's':
+        horta == 'horta tradicional'
+        print(f'{nome}, analisando os dados que me forneceu, sugiro a {horta}.') 
+        return horta
 
-
+def menu_horta(nome, horta, hortas):
+    while True:
+        escolha = input(f'{nome}, você possuí alguma dúvida sobre a {horta}? s/n')
+        if escolha == 's':
+            if horta == 'horta tradicional':
+                print(hortas[0])
+            elif horta == 'horta vertical':
+                print(hortas[1])
+            else:
+                print(hortas[2])
+            break
+        elif escolha == 'n':
+            break
+        else:
+            print('Opção inválida!')
+    return escolha
+    
+    
 #principal
 nome = inserir_nome()
 moradia = inserir_onde_mora()
-espaco = espaco_moradia(moradia)
+jardim = jardim_casa(moradia)
+luz = luz_solar(nome)
+espaco = espaco_moradia(moradia, jardim)
 hortas = des_horta()
 menu = menu_horta(nome, moradia, hortas)
+tradicional = horta_trad(nome, moradia, jardim, luz)
+vertical = horta_vert(moradia, espaco, nome)
+contentor = horta_contentor(moradia, nome, espaco)
                 
 
 
