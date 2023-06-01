@@ -50,32 +50,18 @@ def jardim_casa(moradia):
     
 def espaco_moradia(moradia, jardim):
     if jardim == 'n' or moradia == 'apartamento':
-        if moradia == 'casa':
-            while True:
-                    espaco = input(f'----------------------------------------------------\nPossui muito espaço em sua {moradia}?\n[s]im/[n]ão\n:')
-                    match espaco:
-                        case 's' | 'n':
-                            if espaco == 's':
-                                espaco = 'sim'
-                            else:
-                                espaco = 'não'
-                            break
-                        case _:
-                            print('----------------------------------------------------\nOpção inválida')
-            return espaco
-        else:
-            while True:
-                    espaco = input(f'----------------------------------------------------\nPossui muito espaço em seu {moradia}?\n[s]im/[n]ão\n:')
-                    match espaco:
-                        case 's' | 'n':
-                            if espaco == 's':
-                                espaco = 'sim'
-                            else:
-                                espaco = 'não'
-                            break
-                        case _:
-                            print('----------------------------------------------------\nOpção inválida')
-            return espaco
+        while True:
+            espaco = input(f'----------------------------------------------------\nPossui muito espaço em sua {moradia}?\n[s]im/[n]ão\n:')
+            match espaco:
+                case 's' | 'n':
+                    if espaco == 's':
+                        espaco = 'sim'
+                    else:
+                        espaco = 'não'
+                        break
+                case _:
+                    print('----------------------------------------------------\nOpção inválida')
+        return espaco
 
 #FUNÇÕES PARA HORTA
 def lista_horta():
