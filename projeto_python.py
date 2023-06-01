@@ -13,25 +13,26 @@ def inserir_onde_mora():
     while True:
         moradia = input('Você more em [a]partamento ou [c]asa?\n: ')
         match moradia:
-            case 'a' | 'c':
-                break   
+            case 'a':
+                moradia = 'apartamento'
+                break
+            case 'c':
+                moradia = 'casa'
+                break 
             case _:
-                print('Opção inválida')
+                print('Opção inválida')           
     return moradia
 
 def des_horta():
     h_urb_trad = 'Este tipo de cultivo é o que se realiza na terra, o de sempre. Destina-se um espaço do jardim e como substrato usa-se o do próprio terreno'
-    h_urb_hidro = 'Este tipo de cultivo caracteriza-se por usar água misturada com soluções ricas em minerais. A terra tradicional não é usada, apostando-se antes num cultivo mais experimental e enriquecido. \n*perfeito para plantar espécies herbáceas, aromáticas e vegetais.*'
     h_urb_vert = 'construção realizada de forma perpendicular ao solo. Seu objetivo principal é o de *otimizar o espaço* para plantar frutas, hortaliças, plantas aromáticas ou espécies decorativas.'
     h_urb_contentor = 'Este tipo de cultivo é onde o meio utilizado é um recipiente, vaso, floreiras ou outro tipo de elemento. Ideais para aproveitar o espaço, já que pode escolher o contentor que melhor se adapte ao lugar disponível.'
-    hortas = [h_urb_trad, h_urb_hidro, h_urb_vert, h_urb_contentor]
-
+    hortas = [h_urb_trad, h_urb_vert, h_urb_contentor]
     return hortas
-
 
 def luz_solar(nome):
     while True:
-        luz = input(f'{nome}, onde você mora tem bastante disponibilidade de luz solar? [s]im/[n]ão')
+        luz = input(f'{nome}, onde você mora tem bastante disponibilidade de luz solar? [s]im/[n]ão\n:')
         match luz:
             case 's' | 'n' :
                 break
@@ -39,58 +40,109 @@ def luz_solar(nome):
                 print('Opção inválida!')
     return luz
 
-def espaco_casa(moradia):
+def jardim_casa(moradia):
     if moradia == 'c':
         while True:
-            jardim = input('Sua casa possui um jardim? s/n')
-            match jadim:
+            jardim = input('Sua casa possui um jardim? [s]im/[n]ão\n:')
+            match jardim:
                 case 's' | 'n':
                     break
                 case _:
                     print('Opção inválida')
         return jardim
-
-
-def qtd_sementes(moradia, espaco, nome):
-    if moradia == 'c' and espaco == 's':    
-        qtd_sementes = int(input(f'{nome}, como você mora em uma casa e nela há um jardim, sugiro cultivar estas sementes: \n -> Morango\n-> Tomate\n-> Alface\n-> cenoura\nDestas opções, quantas delas você deseja cultivar?'))
-    elif moradia == 'a' and espaco =='n':
-        qtd_sementes = int(input(f'{nome}, como você more em um apartamento, sugiro que cultive estas sementes:\n-> Alface\n-> Rúcula\n-> Manjericão\n-> Cebolinha\n-> Espinafre\nDestas opções, quantas delas você deseja cultivar? '))
-    return qtd_sementes
-
-                
-            
-def menu_horta(nome, moradia, hortas):
-    if moradia == 'c':
-        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana tradicional\n2-Horta urbana hidropônica\n3-Horta urbana vertical\n4-Horta urbana em contentores')
-        escolha = input(f'Certo, {nome}. Você possui alguma dúvida sobre os tipos de horta? [s]im ou [n]ão\n:')
-        if escolha == 's':
-            while escolha == 's':
-                op = int(input('Digite o número da horta que você gostaria de saber mais\n:')) 
-                match op:
-                    case 1 | 2 | 3 | 4:
-                        print(hortas[op-1])
-                        escolha = input('Mais alguma dúvida? [s]im ou [n]ão\n:')
+    
+def espaco_moradia(moradia):
+    if moradia == 'casa':
+        while True:
+                espaco = input(f'Possui muito espaço em sua {moradia}? [s]im/[n]ão\n:')
+                match espaco:
+                    case 's' | 'n':
+                        break
                     case _:
                         print('Opção inválida')
-    else: 
-        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana hidropônica\n2-Horta urbana vertical\n3-Horta urbana em contentores')
+    else:
+        while True:
+                espaco = input(f'Possui muito espaço em seu {moradia}? [s]im/[n]ão\n:')
+                match espaco:
+                    case 's' | 'n':
+                        break
+                    case _:
+                        print('Opção inválida')
+        return espaco
+
+def qtd_sementes(espaco, luz, nome):
+    while True:
+        if espaco == 's' and luz == 's':    
+            qtd_sementes = int(input(f'{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n -> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o número de sementes que você quer cultivar (ATÉ 6 SEMENTES)\n:'))
+            if qtd_sementes >= 1 and qtd_sementes <=6:
+                break
+            else:
+                print('Quantidade de sementes inválida')
+
+        elif espaco =='s' and luz == 'n':
+            qtd_sementes = int(input(f'{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n -> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o número de sementes que você quer cultivar (ATÉ 6 SEMENTES)\n:'))
+            if qtd_sementes >= 1 and qtd_sementes <=6:
+                break
+            else:
+                print('Quantidade de sementes inválida')
+
+        elif espaco == 'n' and luz == 's':    
+            qtd_sementes = int(input(f'{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n -> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o número de sementes que você quer cultivar (ATÉ 3 SEMENTES)\n:'))
+            if qtd_sementes >= 1 and qtd_sementes <=3:
+                break
+            else:
+                print('Quantidade de sementes inválida')
+
+        else: 
+            qtd_sementes = int(input(f'{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n -> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o número de sementes que você quer cultivar (ATÉ 3 SEMENTES)\n:'))
+            if qtd_sementes >= 1 and qtd_sementes <=3:
+                break
+            else:
+                print('Quantidade de sementes inválida')
+    return qtd_sementes
+
+def lista_semente(qtd_sementes):
+    sementes = []
+    cont = 1
+    for i in range(qtd_sementes):
+        while True:
+            semente = input(f'Digite a {cont}° semente que você deseja\n: ')
+            match semente:
+                case 'Pimentão' | 'Tomate' | 'Alface'| 'Berinjela' | 'Morango' | 'Abóbora' | 'Pimenta' | 'Beterraba' | 'Boldo' | 'Rabanete' | 'Cebolinha':
+                    break
+                case _:
+                    print('Semente inválida')
+        sementes.append(semente)
+        cont+=1
+    return sementes
+
+def menu_horta(nome, moradia, hortas):
+    if moradia == 'casa':
+        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana tradicional\n3-Horta urbana vertical\n4-Horta urbana em contentores')
         escolha = input(f'Certo, {nome}. Você possui alguma dúvida sobre os tipos de horta? [s]im ou [n]ão\n:')
         if escolha == 's':
             while escolha == 's':
                 op = int(input('Digite o número da horta que você gostaria de saber mais\n:')) 
                 match op:
                     case 1 | 2 | 3:
-                        print(hortas[op-2])
+                        print(hortas[op-1])
+                        escolha = input('Mais alguma dúvida? [s]im ou [n]ão\n:')
+                    case _:
+                        print('Opção inválida')
+    else: 
+        print('*TIPOS DE HORTA DISPONÍVEIS*\n1-Horta urbana vertical\n2-Horta urbana em contentores')
+        escolha = input(f'Certo, {nome}. Você possui alguma dúvida sobre os tipos de horta? [s]im ou [n]ão\n:')
+        if escolha == 's':
+            while escolha == 's':
+                op = int(input('Digite o número da horta que você gostaria de saber mais\n:')) 
+                match op:
+                    case 1 | 2:
+                        print(hortas[op])
                         escolha = input('Mais alguma dúvida? [s]im ou [n]ão\n:')
                     case _:
                         print('Opção inválida')
 
-#def horta_trad(moradia, jardim):
-   # if moradia == 'c':
-        #if jardim == 's':
-
-
+#AFUNILAR PRO PROGRAMA ESCOLHER A HORTA ADEQUADA PARA O USUÁRIO ---------------------
 
     
 
@@ -98,7 +150,7 @@ def menu_horta(nome, moradia, hortas):
 #principal
 nome = inserir_nome()
 moradia = inserir_onde_mora()
-#r = espaco_casa()
+espaco = espaco_moradia(moradia)
 hortas = des_horta()
 menu = menu_horta(nome, moradia, hortas)
                 
