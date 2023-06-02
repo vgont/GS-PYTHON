@@ -1,10 +1,69 @@
-#INFORMAÇÕES DO USUÁRIO
+#Cadastro do usuario
 def inserir_nome():
+    print('Area do cadastro')
     '''
     Pergunta e armazena o nome de usuário, retornando pra variável 'nome'
     '''
     nome = input('Digite seu nome\n: ')
     return nome
+
+
+def cadastrar_email():
+    while True:
+        email = input('Digite um E-mail\n:')
+        arroba = '@'
+        ponto_com = '.com'
+        if arroba  and ponto_com not in email:
+            print('O E-mail não é válido! Tente novamente')
+        else:
+            break
+    return email
+
+def cadastrar_senha():
+    senha = input('Digite uma senha\n:')
+    return senha
+
+#login do usuario
+def fazer_login_email(email):
+    print('Area de login')
+    while True:
+        login_email = input('Digite seu E-mail\n:')
+        if login_email != email:
+            for i in range(4):
+                login_email = input('E-mail incorreto!\nDigite novamente\n:')
+                if login_email == email:
+                    break 
+                if i == 3:
+                    while True:
+                        email = input('Números de tentativas excedidas! Redefina o seu E-mail\n:')
+                        arroba = '@'
+                        ponto_com = '.com'
+                        if arroba  and ponto_com not in email:
+                            print('O E-mail não é válido! Tente Novamente')
+                        else:
+                            break
+        else:
+            break
+    return login_email
+
+def fazer_login_senha(senha, nome):
+    while True:
+        login_senha = input('Digite sua senha\n:')
+        if login_senha != senha:
+            for i in range(4):
+                login_senha = input('Senha incorreta!\nDigite novamente\n:')
+                if login_senha == senha:
+                    break
+                if i == 3:
+                    senha = input('Números de tentativas excedidas! Redefina sua senha\n:')  
+        else:
+            break 
+    print(f'Bem-vindo, {nome}! Vamos começar com algumas informações suas.')
+    return login_senha   
+
+
+
+#INFORMAÇÕES DO USUÁRIO
 
 def inserir_moradia():
     '''
@@ -193,8 +252,12 @@ def exibir_info(nome, moradia, luz, jardim, espaco, horta, sementes):
         exibir_lista_sementes(sementes)
 
 #PRINCIPAL
+nome = inserir_nome()
+email = cadastrar_email()
+senha = cadastrar_senha()
+login_email = fazer_login_email(email) 
+login_senha = fazer_login_senha(senha, nome)
 while True:
-    nome = inserir_nome()
     moradia = inserir_moradia()
     jardim = jardim_casa(moradia)
     luz = luz_solar(nome)
