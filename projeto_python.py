@@ -1,4 +1,5 @@
-#Cadastro do usuario
+#INFORMAÇÕES DO USUÁRIO
+
 def inserir_nome():
     print('Area do cadastro')
     '''
@@ -6,81 +7,6 @@ def inserir_nome():
     '''
     nome = input('Digite seu nome\n: ')
     return nome
-
-
-def cadastrar_email():
-    while True:
-        email = input('Digite um E-mail\n:')
-        arroba = '@'
-        ponto_com = '.com'
-        if arroba  and ponto_com not in email:
-            print('O E-mail não é válido! Tente novamente')
-        else:
-            break
-    return email
-
-def cadastrar_senha():
-    senha = input('Digite uma senha\n:')
-    return senha
-
-#login do usuario
-def fazer_login_email(email):
-    print('Area de login')
-    while True:
-        login_email = input('Digite seu E-mail\n:')
-        if login_email != email:
-            for i in range(4):
-                login_email = input('E-mail incorreto!\nDigite novamente\n:')
-                if login_email == email:
-                    break 
-                if i == 3:
-                    while True:
-                        email = input('Números de tentativas excedidas! Redefina o seu E-mail\n:')
-                        arroba = '@'
-                        ponto_com = '.com'
-                        if arroba  and ponto_com not in email:
-                            print('O E-mail não é válido! Tente Novamente')
-                        else:
-                            break
-        else:
-            break
-    return login_email
-
-def fazer_login_senha(senha, nome):
-    while True:
-        login_senha = input('Digite sua senha\n:')
-        if login_senha != senha:
-            for i in range(4):
-                login_senha = input('Senha incorreta!\nDigite novamente\n:')
-                if login_senha == senha:
-                    break
-                if i == 3:
-                    senha = input('Números de tentativas excedidas! Redefina sua senha\n:')  
-        else:
-            break 
-    print(f'Bem-vindo, {nome}! Vamos começar com algumas informações suas.')
-    return login_senha   
-
-
-
-#INFORMAÇÕES DO USUÁRIO
-
-def inserir_moradia():
-    '''
-    Pergunta e armazena o tipo de moradia do usuário, retornando pra variável 'moradia'
-    '''
-    while True:
-        moradia = input('----------------------------------------------------\nVocê mora em [a]partamento ou [c]asa?\n: ')
-        match moradia:
-            case 'a':
-                moradia = 'apartamento'
-                break
-            case 'c':
-                moradia = 'casa'
-                break 
-            case _:
-                print('----------------------------------------------------\nOpção inválida')           
-    return moradia
 
 def cadastrar_email():
     '''
@@ -103,7 +29,7 @@ def cadastrar_senha():
     senha = input('Digite uma senha\n:')
     return senha
 
-#login do usuario
+
 def fazer_login_email(email):
     '''
     Valida o email do usuário, caso exceder o número de tentativas, redefine o email do usuário
@@ -146,6 +72,23 @@ def fazer_login_senha(senha, nome):
             break 
     print(f'Bem-vindo, {nome}! Vamos começar com algumas informações suas.')
     return login_senha
+
+def inserir_moradia():
+    '''
+    Pergunta e armazena o tipo de moradia do usuário, retornando pra variável 'moradia'
+    '''
+    while True:
+        moradia = input('----------------------------------------------------\nVocê mora em [a]partamento ou [c]asa?\n: ')
+        match moradia:
+            case 'a':
+                moradia = 'apartamento'
+                break
+            case 'c':
+                moradia = 'casa'
+                break 
+            case _:
+                print('----------------------------------------------------\nOpção inválida')           
+    return moradia
 
 def luz_solar(nome):
     '''
