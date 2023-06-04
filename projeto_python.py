@@ -1,10 +1,69 @@
-#INFORMAÇÕES DO USUÁRIO
+#Cadastro do usuario
 def inserir_nome():
+    print('Area do cadastro')
     '''
     Pergunta e armazena o nome de usuário, retornando pra variável 'nome'
     '''
     nome = input('Digite seu nome\n: ')
     return nome
+
+
+def cadastrar_email():
+    while True:
+        email = input('Digite um E-mail\n:')
+        arroba = '@'
+        ponto_com = '.com'
+        if arroba  and ponto_com not in email:
+            print('O E-mail não é válido! Tente novamente')
+        else:
+            break
+    return email
+
+def cadastrar_senha():
+    senha = input('Digite uma senha\n:')
+    return senha
+
+#login do usuario
+def fazer_login_email(email):
+    print('Area de login')
+    while True:
+        login_email = input('Digite seu E-mail\n:')
+        if login_email != email:
+            for i in range(4):
+                login_email = input('E-mail incorreto!\nDigite novamente\n:')
+                if login_email == email:
+                    break 
+                if i == 3:
+                    while True:
+                        email = input('Números de tentativas excedidas! Redefina o seu E-mail\n:')
+                        arroba = '@'
+                        ponto_com = '.com'
+                        if arroba  and ponto_com not in email:
+                            print('O E-mail não é válido! Tente Novamente')
+                        else:
+                            break
+        else:
+            break
+    return login_email
+
+def fazer_login_senha(senha, nome):
+    while True:
+        login_senha = input('Digite sua senha\n:')
+        if login_senha != senha:
+            for i in range(4):
+                login_senha = input('Senha incorreta!\nDigite novamente\n:')
+                if login_senha == senha:
+                    break
+                if i == 3:
+                    senha = input('Números de tentativas excedidas! Redefina sua senha\n:')  
+        else:
+            break 
+    print(f'Bem-vindo, {nome}! Vamos começar com algumas informações suas.')
+    return login_senha   
+
+
+
+#INFORMAÇÕES DO USUÁRIO
 
 def inserir_moradia():
     '''
@@ -218,28 +277,28 @@ def qtd_sementes(espaco, luz, jardim, nome):
     '''
     while True:
         if (espaco == 'sim' or jardim == 's') and luz == 'sim':    
-            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o número de sementes que você quer cultivar\n(ATÉ 6 SEMENTES)\n:'))
+            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o *NÚMERO* de sementes que você quer cultivar\n(ATÉ 6 SEMENTES)\n:'))
             if qtd_sementes >= 1 and qtd_sementes <=6:
                 break
             else:
                 print('----------------------------------------------------\nQuantidade de sementes inválida')
 
         elif (espaco == 'sim' or jardim == 's') and luz == 'não':
-            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o número de sementes que você quer cultivar\n(ATÉ 6 SEMENTES)\n:'))
+            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o *NÚMERO* de sementes que você quer cultivar\n(ATÉ 6 SEMENTES)\n:'))
             if qtd_sementes >= 1 and qtd_sementes <=6:
                 break
             else:
                 print('----------------------------------------------------\nQuantidade de sementes inválida')
 
         elif espaco == 'não' and luz == 'sim':    
-            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o número de sementes que você quer cultivar\n(ATÉ 3 SEMENTES)\n:'))
+            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Pimentão\n-> Tomate\n-> Alface\n-> Berinjela\n-> Morango\n-> Abóbora\nDestas opções, digite o *NÚMERO* de sementes que você quer cultivar\n(ATÉ 3 SEMENTES)\n:'))
             if qtd_sementes >= 1 and qtd_sementes <=3:
                 break
             else:
                 print('----------------------------------------------------\nQuantidade de sementes inválida')
 
         else: 
-            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o número de sementes que você quer cultivar\n(ATÉ 3 SEMENTES)\n:'))
+            qtd_sementes = int(input(f'----------------------------------------------------\n{nome}, de acordo com seus dados, sugiro cultivar estas sementes: \n-> Alface\n-> Pimenta\n-> Beterraba\n-> Boldo\n-> Rabanete\n-> Cebolinha\nDestas opções, digite o *NÚMERO* de sementes que você quer cultivar\n(ATÉ 3 SEMENTES)\n:'))
             if qtd_sementes >= 1 and qtd_sementes <=3:
                 break
             else:
@@ -271,7 +330,7 @@ def exibir_lista_sementes(sementes):
     EXEMPLO: "Alface, Tomate, Berinjela."
     '''
     for i in range(len(sementes)):
-        if sementes[i] == (sementes[0] and sementes[-1]):
+        if (sementes[i] == sementes[0]) and (sementes[i] == sementes[-1]):
             print('Sementes escolhidas:', sementes[i], end ='.')
         elif sementes[i] == sementes[0]:
             print('Sementes escolhidas:', sementes[i], end =', ')
@@ -304,7 +363,8 @@ def exibir_info(nome, moradia, luz, jardim, espaco, horta, sementes):
 #PRINCIPAL
 
 #laço criado para o refazimento da operação (caso o usuáro desejar)
-while True:
+ref = 's'
+while ref == 's':
     #Pergunta o nome do usuário
     nome = inserir_nome()
     #Cadastra o email do usuário
@@ -336,12 +396,15 @@ while True:
     #Exibe as informações do usuário
     exibir_infos = exibir_info(nome, moradia, luz, jardim, espaco, horta, sementes)
     #Pergunta se o usuário deseja refazer a operação
-    refazer_operacao = input('\n----------------------------------------------------\nDeseja refazer a operação?\n[s]im/[n]ão\n: ')
-    match refazer_operacao:
-        case 'n':
-            print('Operação finalizada, até mais!')
-            break
-        case 's':
-            print('*----NOVA OPERAÇÃO----*')
-        case _: 
-            print('Resposta inválida')
+    while True:
+        refazer_operacao = input('\n----------------------------------------------------\nDeseja refazer a operação?\n[s]im/[n]ão\n: ')
+        match refazer_operacao:
+            case 'n':
+                print('Operação finalizada, até mais!')
+                ref = 'n'
+                break
+            case 's':
+                print('*----NOVA OPERAÇÃO----*')
+                break
+            case _: 
+                print('Resposta inválida')
